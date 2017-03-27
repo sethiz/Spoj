@@ -1,0 +1,175 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<vector>
+#include<iomanip>
+using namespace std;
+	vector<int> vect (string &a)
+		{
+	int c=a.length();
+	vector<int> v;
+	for(int i=0;i<c;i++)
+		{
+	  v.push_back((a[i]-'0'));
+		}
+	return(v);
+		}
+
+	vector<int> sum(vector<int> a,vector<int> c)
+		{
+	    int carry=0,s;
+	    vector<int> sum;
+	    reverse(a.begin(),a.end());
+	    reverse(c.begin(),c.end());
+	    int i=0;
+	    while((i<a.size())&&(i<c.size()))
+		    {
+	        s=a[i]+c[i]+carry;
+        	    carry=s/10;
+	            s=s%10;
+	        sum.push_back(s);
+	        i++;
+		    }	
+    	if(i>=c.size())
+    	{
+        while(i<a.size())
+     		{
+        s=a[i]+carry;
+    	carry=s/10;
+    	s=s%10;
+        sum.push_back(s);
+        i++;
+	        }	
+    	}
+    	else
+        if(i>=a.size())
+    	{
+        while(i<c.size())
+        {
+        s=c[i]+carry;
+        carry=s/10;
+        s=s%10;
+        sum.push_back(s);
+        i++;
+    	}
+    	}
+    	if(carry!=0)
+        sum.push_back(carry);
+        reverse(sum.begin(),sum.end());
+	return sum;
+        }
+
+vector<int> sub(vector<int> a,vector<int> b)
+	{
+    	vector<int> sub;
+    	int i=0,d;
+    	vector<int> e=a;
+    	reverse(a.begin(),a.end());
+    	reverse(b.begin(),b.end());
+    	while(i<b.size())
+    	{
+        if((a[i])<b[i])
+        {
+            d=a[i]+10-b[i];
+            int j=1;
+            while(a[i+j]==0)
+                a[i+j++]=9;
+            a[i+j]=a[i+j]-1;
+       }
+       else
+       {
+       d=a[i]-b[i];
+       }
+
+       sub.push_back(d);
+       i++;
+       }
+       while(i<a.size())
+       sub.push_back(a[i++]);
+       int k=sub.size()-1;
+       while(k>0)
+       {
+       if(sub[k--]==0)
+        sub.pop_back();
+        else
+            break;
+       }
+       cout<<"\n";
+       reverse(sub.begin(),sub.end());
+	return sub;
+     
+}
+       vector<int> mul(vector<int> a,vector<int> c)
+        {
+int carry=0;
+vector<int> b,num;
+for(int j=c.size()-1;j>=0;j--)
+{
+for(int i=a.size()-1;i>=0;i--)
+{
+int d=(a[i]*c[j])+carry;
+carry=0;
+if(d>9)
+{
+b.push_back((d%10));
+carry=d/10;
+if(i==0)
+{
+    if(carry!=0)
+b.push_back(carry);
+carry=0;
+}
+}
+else
+b.push_back(d);
+}
+int h=b.size();
+if(num.size()==0)
+{
+    while(h--)
+    {
+num.push_back(b[h]);
+b.pop_back();
+    }
+reverse(num.begin(),num.end());
+b.clear();
+}
+else
+{
+int bj=0;
+    for(int i=c.size()-(j+1);i<(num.size());i++)
+    {
+        int s=num[i]+b[bj++]+carry;
+        carry=0;
+        num[i]=s%10;
+        carry=s/10;
+    }
+    while(bj<(b.size()))
+    {
+        int s=b[bj++]+carry;
+        carry=0;
+        if(s>9)
+        {
+        num.push_back(s%10);
+        carry=s/10;
+        }
+        else
+            num.push_back(s);
+    }
+        if(carry)
+            num.push_back(carry);
+        carry=0;
+
+    b.clear();
+}
+}
+return num;
+}
+
+
+int main()
+{   
+           string a;
+cin>>a;
+vector<int> a1=vect(a);
+}
