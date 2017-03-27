@@ -1,5 +1,6 @@
-# Prerequisites
-*.d
+# My files
+*.txt
+practice.cpp
 
 # Compiled Object files
 *.slo
@@ -30,5 +31,3 @@
 *.exe
 *.out
 *.app
-*.txt
-practice.cpp
